@@ -1,6 +1,6 @@
 
 # fichier: oxi_db.py
-# auteur:Rony 
+# auteur: Rony MOUNIAPIN 
 # entreprise: POP School
 # date: 30/10/2020
 
