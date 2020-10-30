@@ -18,7 +18,7 @@ import nmap3
 # pip3 install getmac
 import getmac
 
-# import module_bdd.py
+import oxi_db
 
 
 def scan_sV(host):
@@ -51,7 +51,7 @@ def fake_scan_sV(host):
 
 def envoi_resultats(results, mac):
     for i in results:
-        module_bdd.insert_vuln(mac,
+        oxi_db.insert_vuln(mac,
                                i.get('protocol', '0'),
                                i.get('port', '0'),
                                i.get('state', '0'),
