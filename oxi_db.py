@@ -5,6 +5,7 @@
 # date: 30/10/2020
 
 import sqlite3
+
 #connection à la base de donnees
 connect = sqlite3.connect("oxitool.db")
 #Creation d'un curseur pour utiliser la base de donnees
@@ -18,15 +19,15 @@ def insert_fichier():
 def insert_machine():
     cursor.execute('INSERT')
 
-def insert_vuln(protocol, port, state, service_name, service_product, service_version, service_extrainfo, cpe):
+def insert_vuln(mac_addr, protocol, port, state, service_name, service_product, service_version, cpe):
     #Mise en place de tuples pour la sécurisation de SQLI
-    protocol_vul = (protocol,)              
+    mac_addr_vuln = (mac_addr,)
+    protocol_vul = (protocol,) 
     port_vul = (port,)
     state_vul = (state,)
     s_name_vul = (service_name,)
     s_product_vul = (service_product,)
     s_version_vul = (service_version,)
-    s_extrainfo_vul = (service_extrainfo,)
     cpe_vul = (cpe,)
     request = 'INSERT INTO'
     cursor.execute(request)
