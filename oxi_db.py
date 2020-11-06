@@ -11,13 +11,13 @@ cursor = connect.cursor()                        #Creation d'un curseur pour uti
 
                                                  #Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
                                                  # Definition des fonctions d'insertion des différentes tables
-    def insert_fichier():
-        cursor.execute('INSERT')
+def insert_fichier():
+    cursor.execute('INSERT')
 
-    def insert_machine():
-        cursor.execute('INSERT')
+def insert_machine():
+    cursor.execute('INSERT')
 
-    def insert_vuln(protocol, port, state, service_name, service_product, service_version, service_extrainfo, cpe):
+def insert_vuln(protocol, port, state, service_name, service_product, service_version, service_extrainfo, cpe):
         protocol_vul = (protocol,)               #Mise en place de tuples pour la sécurisation de SQLI
         port_vul = (port,)
         state_vul = (state,)
@@ -26,7 +26,8 @@ cursor = connect.cursor()                        #Creation d'un curseur pour uti
         s_version_vul = (service_version,)
         s_extrainfo_vul = (service_extrainfo,)
         cpe_vul = (cpe,)
-        cursor.execute('INSERT')
+        request = 'INSERT INTO'
+        cursor.execute(request)
 
     def insert_service():
         cursor.execute('INSERT')
