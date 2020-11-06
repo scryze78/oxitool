@@ -6,11 +6,20 @@
 
 import sqlite3
 
-#connection à la base de donnees
-connect = sqlite3.connect("oxitool.db")
-#Creation d'un curseur pour utiliser la base de donnees
-cursor = connect.cursor()                        
-
+#Definition de la fonction de connection et de creation de la base de donnees
+def connect_db():
+    connect = sqlite3.connect("oxitool_db.sq3")
+    #Creation d'un curseur pour utiliser la base de donnees
+    cursor = connect.cursor()
+ 
+#Creation des tables
+def create_table():
+    curseur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement,)")# en attente groupe scan fichier
+    curseur.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
+    curseur.execute("CREATE TABLE IF NOT EXISTS Vulerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
+    curseur.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
+    curseur.execute("CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")#en attente premiere itération
+    
 #Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
 # Definition des fonctions d'insertion des différentes tables
 def insert_fichier():
@@ -86,6 +95,6 @@ def delete_service():
 def delete_desc_port():
     cursor.execute('DELETE')
 
-
+#Définition de la fonction de fermeture de la base de donnees
 def db_close():
   connect.close()
