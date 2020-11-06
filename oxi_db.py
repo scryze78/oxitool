@@ -84,5 +84,4 @@ cursor = connect.cursor()                        #Creation d'un curseur pour uti
 
 
     def db_close():
-    	finally:
      	connect.close()
