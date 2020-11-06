@@ -3,7 +3,7 @@
 # fichier: scan_vuln.py
 # auteur: Adrien Cellier
 # entreprise: POP School
-# date: 30/10/2020
+# date: 06/11/2020
 
 """Ce module cherche les vulnérabilités à la propagation d'un ransomware sur un système.
 Il est prévu pour permettre à oxitool.py d'en appeler scan_et_envoi_resultats() ou les fonctions séparément.
@@ -52,13 +52,13 @@ def fake_scan_sV(host):
 def envoi_resultats(results, mac):
     for i in results:
         oxi_db.insert_vuln(mac,
-                               i.get('protocol', '0'),
-                               i.get('port', '0'),
-                               i.get('state', '0'),
-                               i.get('service', {}).get('name', '0'),
-                               i.get('service', {}).get('product', '0'),
-                               i.get('service', {}).get('version', '0') + i.get('service', '0').get('extrainfo', ''),
-                               i.get('cpe', [{}])[0].get('cpe', '0'))
+                           i.get('protocol', '0'),
+                           i.get('port', '0'),
+                           i.get('state', '0'),
+                           i.get('service', {}).get('name', '0'),
+                           i.get('service', {}).get('product', '0'),
+                           i.get('service', {}).get('version', '0') + i.get('service', '0').get('extrainfo', ''),
+                           i.get('cpe', [{}])[0].get('cpe', '0'))
 
 
 def affichage_resultats(results, mac):
