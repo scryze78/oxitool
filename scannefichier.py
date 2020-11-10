@@ -1,3 +1,8 @@
+# fichier: scannefichier.py
+# auteur: Kamel, Sekou, Josoa
+# entreprise: POP School
+# date: 10/11/2020
+
 import os # module OS est d'interagir avec votre système d'exploitation
 import time # Ce module fournit différentes fonctions liées au temps
 
