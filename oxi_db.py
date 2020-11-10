@@ -2,7 +2,7 @@
 # fichier: oxi_db.py
 # auteur: Rony MOUNIAPIN 
 # entreprise: POP School
-# date: 30/10/2020
+# date: 10/11/2020
 
 import sqlite3
 
