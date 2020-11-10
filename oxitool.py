@@ -3,7 +3,7 @@
 # fichier: oxitool.py
 # auteur: Rony MOUNIAPIN, Adrien CELLIER
 # entreprise: POP School
-# date: 30/10/2020
+# date: 10/11/2020
 
 import scan_vuln
 import oxi_db
