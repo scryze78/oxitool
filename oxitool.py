@@ -27,7 +27,7 @@ def connect_db():
  
 #Creation des tables
 def create_table():
-    curseur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement,)")# en attente groupe scan fichier
+    curseur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, name text, format text, taille integer, date_modification text)")# en attente groupe scan fichier
     curseur.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
     curseur.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
     curseur.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
@@ -39,7 +39,8 @@ def insert_fichier():
     cursor.execute('INSERT')
 
 def insert_machine():
-    cursor.execute('INSERT')
+    request = 'INSERT INTO'
+    cursor.execute('request')
 
 def insert_vuln(mac_addr, protocol, port, state, service_name, service_product, service_version, cpe):
     #Mise en place de tuples pour la sécurisation de SQLI
