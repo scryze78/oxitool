@@ -5,11 +5,21 @@
 # date: 30/10/2020
 
 import sqlite3
-#connection à la base de donnees
-connect = sqlite3.connect("oxitool.db")
-#Creation d'un curseur pour utiliser la base de donnees
-cursor = connect.cursor()                        
 
+#Definition de la fonction de connection et de creation de la base de donnees
+def connect_db():
+    connect = sqlite3.connect("oxitool_db.sq3")
+    #Creation d'un curseur pour utiliser la base de donnees
+    cursor = connect.cursor()
+ 
+#Creation des tables
+def create_table():
+    curseur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement,)")# en attente groupe scan fichier
+    curseur.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
+    curseur.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
+    curseur.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
+    curseur.execute("CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")#en attente premiere itération
+    
 #Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
 # Definition des fonctions d'insertion des différentes tables
 def insert_fichier():
@@ -18,15 +28,15 @@ def insert_fichier():
 def insert_machine():
     cursor.execute('INSERT')
 
-def insert_vuln(protocol, port, state, service_name, service_product, service_version, service_extrainfo, cpe):
+def insert_vuln(mac_addr, protocol, port, state, service_name, service_product, service_version, cpe):
     #Mise en place de tuples pour la sécurisation de SQLI
-    protocol_vul = (protocol,)              
+    mac_addr_vuln = (mac_addr,)
+    protocol_vul = (protocol,) 
     port_vul = (port,)
     state_vul = (state,)
     s_name_vul = (service_name,)
     s_product_vul = (service_product,)
     s_version_vul = (service_version,)
-    s_extrainfo_vul = (service_extrainfo,)
     cpe_vul = (cpe,)
     request = 'INSERT INTO'
     cursor.execute(request)
@@ -85,6 +95,6 @@ def delete_service():
 def delete_desc_port():
     cursor.execute('DELETE')
 
-
+#Définition de la fonction de fermeture de la base de donnees
 def db_close():
   connect.close()
