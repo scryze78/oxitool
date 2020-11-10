@@ -23,6 +23,4 @@ def recherche(path): # Function
 
 recherche(PATH)
 print("--- %s seconds ---" % (time.time() - start_time)) # Afficher le temps écouler( exp: --- 129.3752098083496 seconds ---)
-#b= os.path.getsize("/path/isa_005.mp3")
 
-#ext = os.path.splitext(file_name)[1]
