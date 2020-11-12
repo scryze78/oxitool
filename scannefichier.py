@@ -1,8 +1,3 @@
-# fichier: scannefichier.py
-# auteur: Kamel, Sekou, Josoa
-# entreprise: POP School
-# date: 10/11/2020
-
 import os # module OS est d'interagir avec votre système d'exploitation
 import time # Ce module fournit différentes fonctions liées au temps
 
@@ -26,6 +21,36 @@ def recherche(path): # Function
         pass  # Cette fonction ne fait rien, mais elle est définie. Sans pass il y aurait une erreur de syntaxe
 
 
-recherche(PATH)
+#recherche(PATH)
+variable = recherche(PATH)
+print(variable)
 print("--- %s seconds ---" % (time.time() - start_time)) # Afficher le temps écouler( exp: --- 129.3752098083496 seconds ---)
 
+import sqlite3
+# Definition de la fonction de connection et de creation de la base de donnees
+def connect_db():
+    connect = sqlite3.connect("oxitool_db.sq3")
+    # Creation d'un curseur pour utiliser la base de donnees
+    cursor=connect.cursor()
+
+
+# Creation des tables
+def create_table():
+    cursor.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, nom text, extension text, taille integer)")
+def insert_fichier(nom, extension, taille):
+    #Mise en place de tuples pour la sécurisation de SQLI
+    nom_f = (nom,)
+    extension_f = (extension,)
+    taille_f = (taille,)
+    #cursor.execute('request')
+    request= [(nom_f, extension_f, taille_f)]
+    # executemany()méthode effectue une itération dans la séquence de paramètres, passant à chaque fois les paramètres actuels à la execute()
+    c.executemany('insert into Fichier values (?,?,?)', request)
+    connection.commit()
+
+#oxi_db.insert_scan() fait la liaison avec la base de données oxi_db
+#def envoi_resultats(results):
+    #oxi_db.insert_scan(results.nom_f, results.extension_f, results.taille_f)
+
+#def affich_resultats(results):
+    #print(results.Nom, results.extension, results.taille)
