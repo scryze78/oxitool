@@ -40,11 +40,17 @@ def scan_a():
 
 
 def scan_b():
+    #% TEMP % and % TMP % C:\Users\Username\AppData\Local\Temp
+    #$env:computername  #computername donne le nom de l'ordinateur.
+
+    #TODO : Vérifier que le fichier oxitool.tmp n'existe pas.
     #lancement de la commande vulmap
-    p = subprocess.Popen(["powershell.exe", VULMAP])
-    #récupération de la sortie dans out et des erreurs dans err.
-    out, err = p.communicate()
-    print(out)
+    p = subprocess.run(["powershell.exe", "Write-Output $env:TEMP"])
+    print(p)
+    #p = subprocess.run(["powershell.exe", VULMAP+" > $env:TEMP\\oxitool.tmp"])
+    #print(p)
+    #while open('oxitool.tmp')
+
 
 #oxi_db.insert_vuln() fait la liaison avec la base de données.
 def envoi_resultats(mac, results):
@@ -64,6 +70,7 @@ def scan_et_envoi_resultats():
 
 def main():
     scan_a()
+    scan_b()
 
 
 #Lance main() si le script est lancé comme programme principal.
