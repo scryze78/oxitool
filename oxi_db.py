@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # fichier: oxi_db.py
-# auteur: Rony MOUNIAPIN 
+# auteur: Rony MOUNIAPIN, ZARQOUN kawtar 
 # entreprise: POP School
 # date: 12/11/2020
 
@@ -27,8 +27,10 @@ def insert_fichier(nom, extension, taille):
     nom_f = (nom,)
     extension_f = (extension,)
     taille_f = (taille,)
-    request = ('')
-    cursor.execute('request')
+    #cursor.execute('request')
+    request= [(nom_f, extension_f, taille_f)]
+    c.executemany('insert into stocks values (?,?,?)', request)
+    connection.commit()
 
 def insert_machine():
     cursor.execute('INSERT')
@@ -43,9 +45,10 @@ def insert_vuln(mac_addr, protocol, port, state, service_name, service_product, 
     s_product_vul = (service_product,)
     s_version_vul = (service_version,)
     cpe_vul = (cpe,)
-    request = 'INSERT INTO'
-    cursor.execute(request)
-
+    #cursor.execute(request)
+    request = [(mac_addr_vuln, protocol_vul, port_vul, state_vul, s_name_vul, s_product_vul, s_version_vul, cpe_vul)]
+    c.executemany('insert into stocks values (?,?,?,?,?,?,?,?)', request) ##pour enregister les resultats dans DB
+    connection.commit()
 def insert_service():
     cursor.execute('INSERT')
 
@@ -54,8 +57,10 @@ def insert_desc_port():
 
 #Definition des fonctions d'affichage des différentes tables
 def select_fichier():
-    cursor.execute('SELECT')
-
+    #cursor.execute('SELECT')
+    curseur.execute("SELECT * FROM oxitool_db.Fichier WHERE name = '...'")
+    resultat = list(curseur)
+    #print(resultat)
 def select_machine():
     cursor.execute('SELECT')
 
