@@ -14,7 +14,7 @@ def connect_db():
  
 #Creation des tables
 def create_table():
-    curseur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement,)")# en attente groupe scan fichier
+    curseur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, nom text, extension text, taille integer)")# en attente groupe scan fichier
     curseur.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
     curseur.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
     curseur.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
@@ -22,8 +22,13 @@ def create_table():
     
 #Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
 # Definition des fonctions d'insertion des différentes tables
-def insert_fichier():
-    cursor.execute('INSERT')
+def insert_fichier(nom, extension, taille):
+    #Mise en place de tuples pour la sécurisation de SQLI
+    nom_f = (nom,)
+    extension_f = (extension,)
+    taille_f = (taille,)
+    request = ('')
+    cursor.execute('request')
 
 def insert_machine():
     cursor.execute('INSERT')
