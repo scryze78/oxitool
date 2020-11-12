@@ -29,7 +29,7 @@ def insert_fichier(nom, extension, taille):
     taille_f = (taille,)
     #cursor.execute('request')
     request= [(nom_f, extension_f, taille_f)]
-    c.executemany('insert into stocks values (?,?,?)', request)
+    c.executemany('insert into Fichier values (?,?,?)', request)
     connection.commit()
 
 def insert_machine():
@@ -47,7 +47,7 @@ def insert_vuln(mac_addr, protocol, port, state, service_name, service_product, 
     cpe_vul = (cpe,)
     #cursor.execute(request)
     request = [(mac_addr_vuln, protocol_vul, port_vul, state_vul, s_name_vul, s_product_vul, s_version_vul, cpe_vul)]
-    c.executemany('insert into stocks values (?,?,?,?,?,?,?,?)', request) ##pour enregister les resultats dans DB
+    c.executemany('insert into Vulnerabilite values (?,?,?,?,?,?,?,?)', request) ##pour enregister les resultats dans DB
     connection.commit()
 def insert_service():
     cursor.execute('INSERT')
