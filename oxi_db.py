@@ -58,7 +58,7 @@ def insert_desc_port():
 #Definition des fonctions d'affichage des différentes tables
 def select_fichier():
     #cursor.execute('SELECT')
-    curseur.execute("SELECT * FROM oxitool_db.Fichier WHERE name = '...'")
+    cursor.execute("SELECT * FROM oxitool_db.Fichier WHERE name = '...'")
     resultat = list(curseur)
     #print(resultat)
 def select_machine():
