@@ -14,11 +14,11 @@ def connect_db():
  
 #Creation des tables
 def create_table():
-    curseur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, nom text, extension text, taille integer)")# en attente groupe scan fichier
-    curseur.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
-    curseur.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
-    curseur.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
-    curseur.execute("CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")#en attente premiere itération
+    cursor.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, nom text, extension text, taille integer)")# en attente groupe scan fichier
+    cursor.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
+    cursor.execute("CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")#en attente premiere itération
     
 #Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
 # Definition des fonctions d'insertion des différentes tables
@@ -49,6 +49,7 @@ def insert_vuln(mac_addr, protocol, port, state, service_name, service_product, 
     request = [(mac_addr_vuln, protocol_vul, port_vul, state_vul, s_name_vul, s_product_vul, s_version_vul, cpe_vul)]
     c.executemany('insert into Vulnerabilite values (?,?,?,?,?,?,?,?)', request) ##pour enregister les resultats dans DB
     connection.commit()
+    
 def insert_service():
     cursor.execute('INSERT')
 
@@ -59,8 +60,9 @@ def insert_desc_port():
 def select_fichier():
     #cursor.execute('SELECT')
     cursor.execute("SELECT * FROM oxitool_db.Fichier WHERE name = '...'")
-    resultat = list(curseur)
+    resultat = list(cursor)
     #print(resultat)
+    
 def select_machine():
     cursor.execute('SELECT')
 
