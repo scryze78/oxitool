@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # auteur Kamel, Sekou, Josoa
 # date 13/11/2020
-import sannefichier
+import scannefichier
 import oxi_db
 
 #appel les fonctions de la base de données oxi_db
