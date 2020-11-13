@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# auteur Kamel, Sekou, Josoa
+# auteur: Adrien, Rony, Kamel, Sekou, Josoa
 # date 13/11/2020
 import os # module OS est d'interagir avec votre système d'exploitation
 import time # Ce module fournit différentes fonctions liées au temps
