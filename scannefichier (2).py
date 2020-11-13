@@ -26,7 +26,7 @@ def scan_files_envoi_resultats():
     results = recherche()
     envoi_resultat(results)
 
-scan_files_envoi_resultats(results)
+def scan_files_envoi_resultats(results)
 print("--- %s seconds ---" % (time.time() - start_time)) # Afficher le temps écouler( exp: --- 129.3752098083496 seconds ---)
 
 
