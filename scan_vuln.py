@@ -31,47 +31,24 @@ import oxi_db
 VULMAP = "C:\\Users\\inti\\Documents\\GitHub\\Vulmap-Windows\\vulmap-windows.ps1"
 
 
-def scan_a():
+def scan():
+    #$env:TEMP C:\Users\Username\AppData\Local\Temp
+    #$env:computername  #computername donne le nom de l'ordinateur.
+
     #lancement de la commande vulmap
     p = subprocess.Popen(["powershell.exe", VULMAP])
     #récupération de la sortie dans out et des erreurs dans err.
     out, err = p.communicate()
     print(out)
-
-
-def scan_b():
-    #% TEMP % and % TMP % C:\Users\Username\AppData\Local\Temp
-    #$env:computername  #computername donne le nom de l'ordinateur.
-
-    #TODO : Vérifier que le fichier oxitool.tmp n'existe pas.
-    #lancement de la commande vulmap
-    p = subprocess.run(["powershell.exe", "Write-Output $env:TEMP"])
-    print(p)
-    #p = subprocess.run(["powershell.exe", VULMAP+" > $env:TEMP\\oxitool.tmp"])
-    #print(p)
-    #while open('oxitool.tmp')
-
-
-#oxi_db.insert_vuln() fait la liaison avec la base de données.
-def envoi_resultats(mac, results):
-    oxi_db.insert_vuln(mac, results.product, results.cve, results.risk_score, results.details)
-
-#alternative à envoi_resultats, pour le test.
-def afficher_resultats(mac, results):
-    print(mac, results.product, results.cve, results.risk_score, results.details)
-
-
-def scan_et_envoi_resultats():
-    #TODO : utiliser powershell au lieu de getmac pour récupérer le mac.
-    mac = getmac.get_mac_address()
-    results = scan()
-    envoi_resultat(mac, results)
+    vulns =
+    #retourner une lister de tuples : dans le style [(product, cve, risk_score, vulnerability_detail),(product, cve, risk_score, vulnerability_detail),(product, cve, risk_score, vulnerability_detail)]
+    return vulns
 
 
 def main():
-    scan_a()
-    scan_b()
-
+    vulns = scan()
+    print(vulns)        #pour le test
+    return vulns
 
 #Lance main() si le script est lancé comme programme principal.
 if __name__ == '__main__':
