@@ -2,24 +2,33 @@
 # fichier: oxi_db.py
 # auteur: Rony MOUNIAPIN, ZARQOUN kawtar 
 # entreprise: POP School
-# date: 12/11/2020
+# date: 15/12/2020 --Rony
 
 import sqlite3
 
 #Definition de la fonction de connection et de creation de la base de donnees
-def connect_db():
-    connect = sqlite3.connect("oxitool_db.sq3")
-    #Creation d'un curseur pour utiliser la base de donnees
-    cursor = connect.cursor()
+def create_connection(db_file):
+    """ création de la conncetion à la base de données vers SQLite """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        return conn
+    except Error as e:
+        print(e)
+
+    return conn
  
 #Creation des tables
-def create_table():
-    cursor.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, nom text, extension text, taille integer)")# en attente groupe scan fichier
-    cursor.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
-    cursor.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
-    cursor.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
-    cursor.execute("CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")#en attente premiere itération
-    
+def create_table(conn):
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, nom text, extension text, taille integer)")# en attente groupe scan fichier
+    cur.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
+    cur.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
+    cur.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
+    cur.execute("CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")#en attente premiere itération
+
+    """ en cours de refonte """
+
 #Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
 # Definition des fonctions d'insertion des différentes tables
 def insert_fichier(nom, extension, taille):
