@@ -14,9 +14,8 @@ conn = create_connection(r"chemin_sur_la_clé) """en attente"""
 if conn is not None:
   create_table(conn)
   #appel des fonctions de connection, creation et fermeture de la base de données
-  oxi_db.connect_db()
-  oxi_db.create_table()
-  oxi_db.db_close()
+  oxi_db.create_table(conn)
+  oxi_db.db_close(conn)# a voir si je supprime
   #appel de la fonction scan et envoi resultats de la scan_vuln
   scan_vuln.scan_et_envoi_resultats()
 #sinon erreur
