@@ -1,55 +1,37 @@
 #!/usr/bin/env python3
 
 # fichier: scan_vuln.py
-# auteur: Adrien Cellier
+# auteur: Adrien Cellier, Raphaël Aubin
 # entreprise: POP School
-# date: 10/11/2020
+# date: 17/12/2020
 
-"""Ce module cherche les vulnérabilités à la propagation d'un ransomware sur un système.
-Il est prévu pour permettre à oxitool.py d'en appeler scan_et_envoi_resultats() ou les fonctions séparément.
-Si il est lancé en programme principal, c'est la fonction main() qui sera executée.
-
-Ce script utilise Vulmap pour analyser les vulnérabilités.
-
-Nous développons deux implémentations en parallèle :
-Les fonctions _a correspondent à la récupération des résultats de powershell directement dans des variables pour
-les transférer à la base de données.
-Les fonctions _b correspondent à l'export du résultat dans un fichier texte, puis à la récupération des données pour
-les transférer à la base de données.
+"""Ce module retourne l'état des ports.
+Il est prévu pour permettre à oxitool.py d'en appeler scan_et_envoi_resultats().
 """
 
 
-import subprocess
-import sys
-
-# TODO : utiliser powershell au lieu de getmac pour récupérer le mac.
-# pip3 install getmac
-import getmac
-
-import oxi_db
-
-VULMAP = "C:\\Users\\inti\\Documents\\GitHub\\Vulmap-Windows\\vulmap-windows.ps1"
+import socket
 
 
-def scan():
-    #$env:TEMP C:\Users\Username\AppData\Local\Temp
-    #$env:computername  #computername donne le nom de l'ordinateur.
-
-    #lancement de la commande vulmap
-    p = subprocess.Popen(["powershell.exe", VULMAP])
-    #récupération de la sortie dans out et des erreurs dans err.
-    out, err = p.communicate()
-    print(out)
-    vulns =
-    #retourner une lister de tuples : dans le style [(product, cve, risk_score, vulnerability_detail),(product, cve, risk_score, vulnerability_detail),(product, cve, risk_score, vulnerability_detail)]
-    return vulns
+def portscan(port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((host, port))
+        return True
+    except:
+        return False
 
 
-def main():
-    vulns = scan()
-    print(vulns)        #pour le test
-    return vulns
-
-#Lance main() si le script est lancé comme programme principal.
-if __name__ == '__main__':
-    main()
+def scan_et_envoi_resultats():
+    liste_resultats = []
+    host = socket.gethostname()
+    for port in range(0, 65536):
+        result = portscan(port)
+        if(result):
+            #print("Port {} OPEN".format(port))
+            liste_resultats += [(port,"OPEN")]
+        else:
+            #print("Port {} CLOSED".format(port))
+            liste_resultats += [("{}".format(port),"CLOSED")]
+    #print(liste_resultats)
+    return liste_resultats
