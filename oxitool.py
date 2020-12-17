@@ -17,7 +17,7 @@ if conn is not None:
   oxi_db.create_table(conn)
   oxi_db.db_close(conn)# a voir si je supprime
   #appel de la fonction scan et envoi resultats de la scan_vuln
-  scan_vuln.scan_et_envoi_resultats()
+  vulnerabilites = scan_vuln.scan_et_envoi_resultats()
 #sinon erreur
 else:
   print ("Erreur! problème de connexion à la base de données")
