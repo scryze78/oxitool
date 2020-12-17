@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # fichier: oxi_db.py
-# auteur: Rony MOUNIAPIN, ZARQOUN kawtar 
+# auteur: Rony MOUNIAPIN, ZARQOUN kawtar
 # entreprise: POP School
-# date: 15/12/2020 --Rony
+# date: 17/12/2020 --Rony
 
 import sqlite3
 
-#Definition de la fonction de connection et de creation de la base de donnees
+
+# Definition de la fonction de connection et de creation de la base de donnees
 def create_connection(db_file):
     """ création de la conncetion à la base de données vers SQLite """
     conn = None
@@ -17,105 +18,138 @@ def create_connection(db_file):
         print(e)
 
     return conn
- 
-#Creation des tables
+
+
+# Creation des tables
 def create_table(conn):
     cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS Fichier (id_fichier integer primary key autoincrement, nom text, extension text, taille integer)")# en attente groupe scan fichier
-    cur.execute("CREATE TABLE IF NOT EXISTS Machine (id_machine integer primary key autoincrement, address_ip text, address_mac text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
-    cur.execute("CREATE TABLE IF NOT EXISTS Vulnerabilite (id_vuln integer primary key autoincrement, mac_address text, protocol text, port text, state text, service_name text, service product text, service_version text, cpe text)")
-    cur.execute("CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")#en attente premiere itération
-    cur.execute("CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")#en attente premiere itération
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS File (id_file integer primary key autoincrement, name text, extend text, size integer)")  # en attente groupe scan fichier
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS Host (id_Host integer primary key autoincrement, ip_address text, mac_address text, name text, os_name text, os_flavor text, os_sp text, purpose text, info text)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS Ports (id_Port integer primary key autoincrement, num_port integer, state text)")
+    #cur.execute(
+     #   "CREATE TABLE IF NOT EXISTS Service (id_service integer primary key autoincrement,)")  # en attente premiere itération
+    #cur.execute(
+     #   "CREATE TABLE IF NOT EXISTS port (id_port integer primary key autoincrement,)")  # en attente premiere itération
 
-    """ en cours de refonte """
 
-#Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
+
+# Mise en place du CRUD: CREATE, READ, UPDATE, DELETE.
 # Definition des fonctions d'insertion des différentes tables
-def insert_fichier(nom, extension, taille):
-    #Mise en place de tuples pour la sécurisation de SQLI
-    nom_f = (nom,)
-    extension_f = (extension,)
-    taille_f = (taille,)
-    #cursor.execute('request')
-    request= [(nom_f, extension_f, taille_f)]
-    c.executemany('insert into Fichier values (?,?,?)', request)
-    connection.commit()
+def insert_file(conn, file):
+    cur = conn.cursor()
+    # cursor.execute('request')
+    sql_insert_file = """INSERT INTO Fichier (name,extend,size) VALUES ( ?, ?, ?);"""
+    cur.executemany(sql, var_fichier)
+    conn.commit()
 
-def insert_machine():
+
+def insert_host(conn):
     cursor.execute('INSERT')
 
-def insert_vuln(mac_addr, protocol, port, state, service_name, service_product, service_version, cpe):
-    #Mise en place de tuples pour la sécurisation de SQLI
-    mac_addr_vuln = (mac_addr,)
-    protocol_vul = (protocol,) 
-    port_vul = (port,)
-    state_vul = (state,)
-    s_name_vul = (service_name,)
-    s_product_vul = (service_product,)
-    s_version_vul = (service_version,)
-    cpe_vul = (cpe,)
-    #cursor.execute(request)
-    request = [(mac_addr_vuln, protocol_vul, port_vul, state_vul, s_name_vul, s_product_vul, s_version_vul, cpe_vul)]
-    c.executemany('insert into Vulnerabilite values (?,?,?,?,?,?,?,?)', request) ##pour enregister les resultats dans DB
-    connection.commit()
-    
-def insert_service():
-    cursor.execute('INSERT')
 
-def insert_desc_port():
-    cursor.execute('INSERT')
+def insert_port(conn, port):
+    cur = conn.cursor()
+    # cursor.execute(request)
+    sql = """INSERT INTO Ports (num_port,state) VALUES (?, ?);"""
+    cur.executemany(sql, var_fichier)
+    conn.commit()
 
-#Definition des fonctions d'affichage des différentes tables
-def select_fichier():
-    #cursor.execute('SELECT')
-    cursor.execute("SELECT * FROM oxitool_db.Fichier WHERE name = '...'")
+
+def insert_service(conn):
+    cur = conn.cursor()
+    cur.execute('INSERT')
+
+
+def insert_desc_port(conn):
+    cur = conn.cursor()
+    cur.execute('INSERT')
+
+
+# Definition des fonctions d'affichage des différentes tables
+def select_file(conn):
+    cur = conn.cursor()
+    # cursor.execute('SELECT')
+    cur.execute("SELECT * FROM oxitool_db.File WHERE name = '...'")
     resultat = list(cursor)
-    #print(resultat)
-    
-def select_machine():
-    cursor.execute('SELECT')
+    # print(resultat)
 
-def select_vuln():
-    cursor.execute('SELECT')
 
-def select_service():
-    cursor.execute('SELECT')
+def select_host(conn):
+    cur = conn.cursor()
+    cur.execute('SELECT')
 
-def select_desc_port():
-    cursor.execute('SELECT')
 
-#Definition des fonctions de modification des différentes tables
-def update_fichier():
-    cursor.execute('UPDATE')
+def select_vuln(conn):
+    cur = conn.cursor()
+    cur.execute('SELECT')
 
-def update_machine():
-    cursor.execute('UPDATE')
 
-def update_vuln():
-    cursor.execute('UPDATE')
+def select_service(conn):
+    cur = conn.cursor()
+    cur.execute('SELECT')
 
-def update_service():
-    cursor.execute('UPDATE')
 
-def update_desc_port():
-    cursor.execute('UPDATE')
+def select_desc_port(conn):
+    cur = conn.cursor()
+    cur.execute('SELECT')
+
+
+# Definition des fonctions de modification des différentes tables
+def update_file(conn):
+    cur = conn.cursor()
+    cur.execute('UPDATE')
+
+
+def update_host(conn):
+    cur = conn.cursor()
+    cur.execute('UPDATE')
+
+
+def update_vuln(conn):
+    cur = conn.cursor()
+    cur.execute('UPDATE')
+
+
+def update_service(conn):
+    cur = conn.cursor()
+    cur.execute('UPDATE')
+
+
+def update_desc_port(conn):
+    cur = conn.cursor()
+    cur.execute('UPDATE')
+
 
 # Definition des fonctions pour effacer dans les différentes tables
-def delete_fichier():
-    cursor.execute('DELETE')
+def delete_file(conn):
+    cur = conn.cursor()
+    cur.execute('DELETE')
 
-def delete_machine():
-    cursor.execute('DELETE')
 
-def delete_vuln():
-    cursor.execute('DELETE')
+def delete_host(conn):
+    cur = conn.cursor()
+    cur.execute('DELETE')
 
-def delete_service():
-    cursor.execute('DELETE')
 
-def delete_desc_port():
-    cursor.execute('DELETE')
+def delete_vuln(conn):
+    cur = conn.cursor()
+    cur.execute('DELETE')
 
-#Définition de la fonction de fermeture de la base de donnees
-def db_close():
-  connect.close()
+
+def delete_service(conn):
+    cur = conn.cursor()
+    cur.execute('DELETE')
+
+
+def delete_desc_port(conn):
+    cur = conn.cursor()
+    cur.execute('DELETE')
+
+
+# Définition de la fonction de fermeture de la base de donnees
+def db_close(conn):
+    cur = conn.cursor()
+    cur.close()
