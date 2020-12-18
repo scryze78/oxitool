@@ -3,7 +3,7 @@
 # fichier: scan_vuln.py
 # auteur: Adrien Cellier, Raphaël Aubin
 # entreprise: POP School
-# date: 18s/12/2020
+# date: 18/12/2020
 
 """Ce module retourne l'état des ports.
 Il est prévu pour permettre à oxitool.py d'en appeler scan_et_envoi_resultats().
