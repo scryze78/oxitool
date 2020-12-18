@@ -3,7 +3,7 @@
 # fichier: oxitool.py
 # auteur: Rony MOUNIAPIN, Adrien CELLIER
 # entreprise: POP School
-# date: 15/12/2020 --Rony
+# date: 18/12/2020 --Rony
 
 import scan_vuln
 import oxi_db
@@ -17,7 +17,10 @@ if conn is not None:
   oxi_db.create_table(conn)
   #appel de la fonction scan et envoi resultats de la scan_vuln
   vulnerabilites = scan_vuln.scan_et_envoi_resultats()
-  
+  '''appel de la fonction d'insertion
+      :param conn pour la connection à la bdd
+      :param vulnerabilites tuple des ports et leurs états '''
+  insert_port(conn, vulnerabilites)
   oxi_db.db_close(conn)# à voir si je supprime
 
 #sinon erreur
