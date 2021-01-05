@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # auteur: Adrien, Rony, Kamel, Sekou, Josoa
-# date 05/01/2021 Rony
+# date: 05/01/2021 --Rony
 import os
 
 
