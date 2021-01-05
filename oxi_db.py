@@ -2,9 +2,10 @@
 # fichier: oxi_db.py
 # auteur: Rony MOUNIAPIN, ZARQOUN kawtar
 # entreprise: POP School
-# date: 17/12/2020 --Rony
+# date: 05/01/2021 --Rony
 
 import sqlite3
+from sqlite3 import Error
 
 
 # Definition de la fonction de connection et de creation de la base de donnees
@@ -41,8 +42,8 @@ def create_table(conn):
 def insert_file(conn, file):
     cur = conn.cursor()
     # cursor.execute('request')
-    sql_insert_file = """INSERT INTO Fichier (name,extend,size) VALUES ( ?, ?, ?);"""
-    cur.executemany(sql, var_fichier)
+    sql_insert_file = """INSERT INTO File (name,extend,size) VALUES ( ?, ?, ?);"""
+    cur.executemany(sql_insert_file, file)
     conn.commit()
 
 
@@ -53,8 +54,8 @@ def insert_host(conn):
 def insert_port(conn, port):
     cur = conn.cursor()
     # cursor.execute(request)
-    sql = """INSERT INTO Ports (num_port,state) VALUES (?, ?);"""
-    cur.executemany(sql, var_fichier)
+    sql_insert_port = """INSERT INTO Ports (num_port,state) VALUES (?, ?);"""
+    cur.executemany(sql_insert_port, port)
     conn.commit()
 
 
