@@ -5,7 +5,7 @@
 # entreprise: POP School
 # date: 05/01/2021 --Rony
 import scan_file
-import scan_vuln
+import scan_port
 import oxi_db
 
 
@@ -22,7 +22,7 @@ if conn is not None:
   #appel de la fonction d'insertion de fichiers
   oxi_db.insert_file(conn, var_fichier)
   #appel de la fonction scan et envoi resultats de la scan_vuln
-  vulnerabilites = scan_vuln.scan_et_envoi_resultats()
+  vulnerabilites = scan_port.scan_et_envoi_resultats()
   #appel de la fonction d'insertion de vulnérabilités
   oxi_db.insert_port(conn, vulnerabilites)
   """:param conn pour la connection à la bdd
