@@ -10,7 +10,7 @@ import oxi_db
 
 
 #Appel de la fonction create_connection() et permet de récupérer le curseur de connection dans la variable "conn"
-conn = oxi_db.create_connection(r"H:\Sqlite\db\pornhub.db")
+conn = oxi_db.create_connection(r"oxitool.db")
 PATH = "C:\\"
 liste_ini = []
 #Si on a réussi à creer la base on fait ce qu'il y a dans le main
